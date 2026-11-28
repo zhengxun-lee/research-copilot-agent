@@ -1,0 +1,585 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <meta name="theme-color" content="#f8f9ff" />
+    <meta
+      name="description"
+      content="Research Copilot — a local-first research workspace with observable agent execution and source-backed answers."
+    />
+    <title>Research Copilot · Agent Console</title>
+    <link rel="icon" href="/assets/logo.png" type="image/png" />
+    <script src="/lib/appearance-init.js"></script>
+    <link rel="stylesheet" href="/tokens.css" />
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/console.css" />
+    <link rel="stylesheet" href="/clarity.css" />
+    <link rel="stylesheet" href="/vendor/katex/katex.min.css" />
+  </head>
+  <body class="landing-mode">
+    <a class="skip-link" href="#mainContent">跳转到工作区</a>
+    <div class="app-shell">
+      <aside class="sidebar" id="sessionPanel" aria-label="Research navigator">
+        <a
+          class="brand-row"
+          href="#overview"
+          aria-label="Research Copilot 控制台概览"
+          ><span class="brand-mark"><img src="/assets/logo.png" alt="" /></span
+          ><span class="brand-copy"
+            ><strong
+              >Research Copilot<span class="brand-beta">LOCAL</span></strong
+            ></span
+          ></a
+        >
+        <a class="workspace-home-link" href="#workspace" data-view-link="workspace">研究工作台</a>
+        <button class="new-chat-button" id="newChatButton" type="button">
+          新建研究
+        </button>
+        <div class="sidebar-section-label">WORKSPACE</div>
+        <nav class="main-navigation" aria-label="主导航">
+          <a href="#knowledge" data-view-link="knowledge"
+            ><span data-icon="library"></span>知识库<span
+              id="navDocCount"
+              class="nav-count"
+              >—</span
+            ></a
+          >
+          <a href="#settings" data-view-link="settings"
+            ><span data-icon="settings"></span>设置</a
+          >
+        </nav>
+        <section
+          class="sidebar-section sessions-section"
+          aria-labelledby="sessionListTitle"
+        >
+          <div class="sidebar-section-label" id="sessionListTitle">
+            最近研究 <span id="sessionCount"></span>
+          </div>
+          <nav
+            class="session-list"
+            id="sessionList"
+            aria-label="历史对话"
+          ></nav>
+        </section>
+      </aside>
+      <div class="workspace-shell">
+        <header class="topbar">
+          <div class="topbar-context">
+            <button
+              id="menuButton"
+              class="icon-button"
+              aria-label="展开导航"
+              aria-controls="sessionPanel"
+              aria-expanded="false"
+              title="导航"
+            >
+              <span data-icon="panel"></span></button
+            ><span class="context-root">Workspace</span
+            ><span class="context-divider">/</span
+            ><strong id="viewTitle">研究工作台</strong>
+          </div>
+          <div class="topbar-actions">
+            <button
+              id="toggleInspector"
+              class="icon-button"
+              title="展开执行详情"
+              aria-label="展开执行详情"
+              aria-expanded="false"
+            >
+              <span data-icon="inspect"></span>
+            </button>
+          </div>
+        </header>
+        <main id="mainContent" tabindex="-1">
+          <section data-view="workspace" class="workspace-view" hidden>
+            <div class="chat-pane">
+              <div class="workspace-tabbar">
+                <div class="workspace-tab">
+                  <span data-icon="terminal"></span
+                  ><span id="activeSessionTitle">Untitled research</span>
+                </div>
+              </div>
+              <div class="workspace-content">
+                <section
+                  class="messages"
+                  id="messages"
+                  role="log"
+                  aria-live="polite"
+                  aria-relevant="additions text"
+                ></section>
+              </div>
+              <div id="taskStatusBar" class="task-status-bar" hidden>
+                <span id="taskStatusText" role="status"></span>
+                <button type="button" data-task-action="pause">暂停</button>
+                <button type="button" data-task-action="resume">继续</button>
+                <button type="button" data-task-action="cancel">停止</button>
+                <button
+                  type="button"
+                  data-task-action="approve"
+                  data-approved="true"
+                >
+                  允许工具执行
+                </button>
+                <button
+                  type="button"
+                  data-task-action="approve"
+                  data-approved="false"
+                >
+                  拒绝
+                </button>
+              </div>
+              <section class="composer-wrap" aria-label="发送消息">
+                <form class="composer" id="chatForm">
+                  <textarea
+                    id="messageInput"
+                    rows="2"
+                    aria-label="研究问题"
+                    placeholder="直接提问，Agent 按需检索本地论文并调用工具。"
+                    autocomplete="off"
+                  ></textarea>
+                  <div class="composer-toolbar">
+                    <div class="composer-context">
+                      <span id="composerRouting" class="composer-routing" hidden><span data-icon="sparkles"></span><span>自动路由</span></span>
+                      <select id="composerRetrieval" aria-label="检索方式">
+                        <option value="keyword">BM25 检索</option>
+                        <option value="semantic">本地语义检索</option>
+                        <option value="hybrid">混合检索</option>
+                      </select>
+                    </div>
+                    <button class="send-button" id="sendButton" type="submit">
+                      <span>运行研究</span><span data-icon="send"></span>
+                    </button>
+                  </div>
+                </form>
+              </section>
+            </div>
+            <div id="inspectorParking" hidden>
+              <aside
+                class="agent-inspector"
+                id="agentInspector"
+                aria-label="Agent Inspector"
+              >
+                <div class="inspector-title">
+                  <span><span data-icon="inspect"></span>执行详情</span
+                  ><span
+                    id="runtimeState"
+                    class="state-badge"
+                    aria-live="polite"
+                    >idle</span
+                  >
+                </div>
+                <div
+                  class="inspector-tabs"
+                  role="tablist"
+                  aria-label="Inspector 面板"
+                >
+                  <button
+                    role="tab"
+                    aria-selected="true"
+                    id="inspector-tab-trace"
+                    aria-controls="inspector-trace"
+                    data-inspector-tab="trace"
+                  >
+                    执行过程</button
+                  ><button
+                    role="tab"
+                    aria-selected="false"
+                    id="inspector-tab-retrieval"
+                    aria-controls="inspector-retrieval"
+                    data-inspector-tab="retrieval"
+                  >
+                    检索结果</button
+                  ><button
+                    role="tab"
+                    aria-selected="false"
+                    id="inspector-tab-runtime"
+                    aria-controls="inspector-runtime"
+                    data-inspector-tab="runtime"
+                  >
+                    运行状态
+                  </button>
+                </div>
+                <div
+                  class="inspector-content"
+                  id="inspector-trace"
+                  role="tabpanel"
+                  aria-labelledby="inspector-tab-trace"
+                  data-inspector-panel="trace"
+                >
+                  <div class="panel-caption">
+                    <span>执行流程</span
+                    ><span class="live-tag" id="flowStatus">Awaiting task</span>
+                  </div>
+                  <div id="executionGraph" class="execution-graph"></div>
+                  <div class="panel-caption">
+                    执行步骤 <span id="eventCount">0 events</span>
+                  </div>
+                  <div id="traceEmpty" class="inspector-empty">
+                    <span data-icon="activity"></span
+                    ><strong>暂无执行事件</strong>
+                  </div>
+                  <ol
+                    id="runtimeEvents"
+                    class="runtime-events"
+                    aria-label="实际执行事件"
+                  ></ol>
+                </div>
+                <div
+                  class="inspector-content"
+                  id="inspector-retrieval"
+                  role="tabpanel"
+                  aria-labelledby="inspector-tab-retrieval"
+                  data-inspector-panel="retrieval"
+                  hidden
+                >
+                  <div class="panel-caption">RETRIEVAL INSPECTOR</div>
+                  <div id="retrievalInspector" class="inspector-empty">
+                    暂无检索记录
+                  </div>
+                </div>
+                <div
+                  class="inspector-content"
+                  id="inspector-runtime"
+                  role="tabpanel"
+                  aria-labelledby="inspector-tab-runtime"
+                  data-inspector-panel="runtime"
+                  hidden
+                >
+                  <div class="panel-caption">
+                    RESOURCE BUDGET <a href="#settings">配置预算</a>
+                  </div>
+                  <pre id="runtimeBudget">暂无预算消耗</pre>
+                  <div id="runtimeMeters"></div>
+                  <div class="runtime-actions">
+                    <button type="button" data-task-action="pause">暂停</button>
+                    <button type="button" data-task-action="resume">
+                      继续
+                    </button>
+                    <button type="button" data-task-action="cancel">
+                      取消
+                    </button>
+                    <button
+                      type="button"
+                      data-task-action="approve"
+                      data-approved="true"
+                    >
+                      批准工具
+                    </button>
+                    <button
+                      type="button"
+                      data-task-action="approve"
+                      data-approved="false"
+                    >
+                      拒绝工具
+                    </button>
+                  </div>
+                  <div class="runtime-restore">
+                    <input
+                      id="restoreRunId"
+                      aria-label="Checkpoint 运行 ID"
+                      placeholder="运行 ID（重启后恢复）"
+                    />
+                    <button type="button" id="restoreTask">
+                      加载 Checkpoint
+                    </button>
+                  </div>
+                  <div id="interruptedTool" hidden>
+                    <p>工具结果未提交，请核对实际副作用；系统不会自动重放。</p>
+                    <textarea
+                      id="verifiedToolResult"
+                      aria-label="已核实的工具结果"
+                      placeholder="输入已核实的结果"
+                    ></textarea>
+                    <button type="button" data-task-action="resolve">
+                      提交核实结果并继续
+                    </button>
+                  </div>
+                  <pre id="runtimePending"></pre>
+                  <p id="runtimeError" role="status"></p>
+                  <p class="inspector-note">
+                    取消会停止后续调度；已发出的工具操作无法撤销。
+                  </p>
+                </div>
+              </aside>
+            </div>
+          </section>
+          <section data-view="knowledge" class="page-view" hidden>
+            <div class="page-heading">
+              <div>
+                <h1>知识库<span class="title-dot">.</span></h1>
+              </div>
+              <div class="knowledge-actions">
+                <button
+                  class="secondary-button"
+                  id="refreshKnowledge"
+                  type="button"
+                >
+                  <span data-icon="refresh"></span>刷新知识库
+                </button>
+                <button
+                  id="openPdfImport"
+                  type="button"
+                  class="primary-button knowledge-import-button"
+                >
+                  <span data-icon="upload"></span>导入论文 PDF
+                </button>
+              </div>
+            </div>
+            <div class="knowledge-layout">
+              <div>
+                <div class="section-toolbar">
+                  <h2>文档</h2>
+                  <label class="search-field"
+                    ><span data-icon="search"></span
+                    ><input
+                      id="documentFilter"
+                      placeholder="筛选文档"
+                      aria-label="筛选文档"
+                  /></label>
+                </div>
+                <div id="knowledgeDocuments"></div>
+                <ol
+                  id="importResults"
+                  class="import-results"
+                  aria-live="polite"
+                ></ol>
+              </div>
+            </div>
+          </section>
+          <section data-view="settings" class="page-view" hidden>
+            <div class="page-heading">
+              <div>
+                <h1>设置<span class="title-dot">.</span></h1>
+              </div>
+              <span class="outline-badge">本地偏好</span>
+            </div>
+            <section class="surface-card motion-settings-panel">
+                <div class="panel-caption">APPEARANCE & ACCESSIBILITY</div>
+                <label class="switch-row"
+                  ><span><strong>状态动效</strong></span
+                  ><input id="motionEnabled" type="checkbox" checked
+                /></label>
+              </section>
+            <section class="surface-card model-settings-panel">
+              <div id="modelSettings">读取模型配置…</div>
+              <p id="modelSettingsStatus" role="status"></p>
+            </section>
+            <div class="settings-layout">
+              <section id="modelBudgetPanel" class="model-budget-panel" hidden>
+                <div class="panel-caption">
+                  执行预算 <span>任务共享 · 下次任务生效</span>
+                </div>
+                <form id="budgetForm" class="budget-grid">
+                  <label
+                    >最大步骤<input
+                      name="max_steps"
+                      type="number"
+                      min="1"
+                      value="10"
+                      required
+                  /></label>
+                  <label
+                    >Token 上限<input
+                      name="max_tokens"
+                      type="number"
+                      min="1"
+                      placeholder="不设限"
+                  /></label>
+                  <label
+                    >费用上限（同报价币种）<input
+                      name="max_cost"
+                      type="number"
+                      step="0.001"
+                      min="0"
+                      placeholder="需填写单价"
+                  /></label>
+                  <label
+                    >任务时长（秒）<input
+                      name="max_seconds"
+                      type="number"
+                      min="1"
+                      value="300"
+                      required
+                  /></label>
+                  <label
+                    >工具调用上限<input
+                      name="max_tool_calls"
+                      type="number"
+                      min="0"
+                      value="20"
+                      required
+                  /></label>
+                  <label
+                    >LLM 请求上限<input
+                      name="max_llm_calls"
+                      type="number"
+                      min="0"
+                      value="20"
+                      required
+                  /></label>
+                  <label
+                    >输入单价 / 百万 Token<input
+                      name="input_price_per_million"
+                      type="number"
+                      step="0.001"
+                      min="0"
+                      value="0"
+                      required
+                  /></label>
+                  <label
+                    >输出单价 / 百万 Token<input
+                      name="output_price_per_million"
+                      type="number"
+                      step="0.001"
+                      min="0"
+                      value="0"
+                      required
+                  /></label>
+                  <label class="approval-setting"
+                    ><input id="confirmSearch" type="checkbox" />
+                    检索前人工确认</label
+                  >
+                </form>
+                <button id="saveBudget" class="primary-button" type="button">
+                  保存本地预算偏好
+                </button>
+              </section>
+
+            </div>
+          </section>
+          <section data-view="overview" class="landing-view">
+            <div class="hero-atmosphere">
+              <canvas id="particleCanvas" aria-hidden="true"></canvas>
+              <div class="hero-content">
+                <img
+                  class="project-logo"
+                  src="/assets/logo.png"
+                  alt="Research Copilot Agent"
+                  width="1536"
+                  height="1024"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <h1>From papers.<br />To <span>perspective.</span></h1>
+                <p>
+                  阅读论文，连接证据，形成见解。<br />你的资料与研究进度，始终保存在本地。
+                </p>
+                <div class="hero-actions">
+                  <a href="#workspace" class="primary-button"
+                    >开始研究</a>
+                </div>
+              </div>
+              <div class="hero-diagram" data-reveal>
+                <div id="architectureGraph"></div>
+              </div>
+            </div>
+            <section id="architecture" class="architecture-section">
+              <span class="eyebrow">INTELLIGENCE YOU CAN INSPECT</span>
+              <h2>Every step, connected.<br />Every answer, grounded.</h2>
+              <div class="feature-grid">
+                <article class="surface-card" data-reveal>
+                  <span data-icon="route"></span>
+                  <h3>The right model for the question.</h3>
+                  <p>
+                    Simple / Complex
+                    路由让轻量任务与复杂研究走向不同的模型配置。
+                  </p>
+                  <span class="feature-tag">Model routing</span>
+                </article>
+                <article class="surface-card" data-reveal>
+                  <span data-icon="layers"></span>
+                  <h3>Evidence beyond a keyword.</h3>
+                  <p>BM25、轻量语义与向量检索，通过 RRF 融合连接本地知识。</p>
+                  <span class="feature-tag">Hybrid retrieval</span>
+                </article>
+                <article class="surface-card" data-reveal>
+                  <span data-icon="activity"></span>
+                  <h3>Control without the black box.</h3>
+                  <p>
+                    可观测事件、执行预算、人工确认与
+                    Checkpoint，让任务状态始终清晰。
+                  </p>
+                  <span class="feature-tag">Agent runtime</span>
+                </article>
+              </div>
+            </section>
+          </section>
+        </main>
+        <footer class="statusbar">
+          <span
+            ><span class="status-dot" id="footerConnection"></span
+            ><span id="footerStatus">Connecting to local runtime</span></span
+          ><span
+            ><span id="footerMode">ReAct runtime</span
+            ><span class="statusbar-separator">/</span
+            ><span id="footerTask">No active task</span></span
+          >
+        </footer>
+      </div>
+    </div>
+    <dialog
+      id="pdfImportDialog"
+      class="import-dialog"
+      aria-labelledby="pdfImportTitle"
+    >
+      <header>
+        <h2 id="pdfImportTitle">导入论文 PDF</h2>
+        <button
+          type="button"
+          class="icon-button"
+          id="closePdfImport"
+          aria-label="关闭导入窗口"
+        >
+          ×
+        </button>
+      </header>
+      <label id="pdfUploadLabel" class="import-dropzone" for="pdfUpload">
+        <span data-icon="upload"></span
+        ><strong class="upload-button-text">选择论文 PDF</strong>
+        <small>支持多篇 · 单篇 20 MiB / 500 页</small>
+        <input
+          id="pdfUpload"
+          class="pdf-upload-input"
+          type="file"
+          accept="application/pdf,.pdf"
+          multiple
+          aria-label="选择论文 PDF 文件"
+        />
+      </label>
+      <div class="import-dialog-footer">
+        <button type="button" id="cancelPdfImport" class="secondary-button">
+          完成
+        </button>
+      </div>
+    </dialog>
+    <dialog id="retrievalNotice" class="retrieval-notice" aria-labelledby="retrievalNoticeTitle" aria-describedby="retrievalNoticeText">
+      <h2 id="retrievalNoticeTitle">暂时无法使用混合检索</h2>
+      <p id="retrievalNoticeText"></p>
+      <button id="closeRetrievalNotice" type="button" class="primary-button" autofocus>知道了</button>
+    </dialog>
+    <dialog id="commandPalette" class="command-palette">
+      <div class="command-input">
+        <span data-icon="search"></span
+        ><input
+          id="commandSearch"
+          placeholder="搜索命令、页面和研究会话…"
+          aria-label="搜索命令"
+          autocomplete="off"
+        /><kbd>Esc</kbd>
+      </div>
+      <div
+        id="commandResults"
+        class="command-results"
+        role="listbox"
+        aria-label="命令列表"
+      ></div>
+      <footer>
+        ↑ ↓ 选择 <kbd>Enter</kbd> 执行 <span>RESEARCH COPILOT</span>
+      </footer>
+    </dialog>
+    <script defer src="/vendor/katex/katex.min.js"></script>
+    <script type="module" src="/app.js?v=pdf-picker-2"></script>
+  </body>
+</html>

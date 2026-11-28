@@ -1,0 +1,376 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Workspace — Agent Inspector — Research Copilot Agent</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">/** @type {import('tailwindcss').Config} */
+globalThis.tailwind = globalThis.tailwind || {};
+globalThis.tailwind.config = {
+  darkMode: 'class',
+  theme: {
+    extend: {
+      colors: {
+        'light-primary': '#0037B0',
+        'light-on-primary': '#FFFFFF',
+        'light-primary-container': '#1D4ED8',
+        'light-on-primary-container': '#CAD3FF',
+        'light-secondary': '#006780',
+        'light-on-secondary': '#FFFFFF',
+        'light-secondary-container': '#76DCFF',
+        'light-on-secondary-container': '#006077',
+        'light-tertiary': '#5800C0',
+        'light-on-tertiary': '#FFFFFF',
+        'light-tertiary-container': '#712EDD',
+        'light-on-tertiary-container': '#DFCDFF',
+        'light-error': '#BA1A1A',
+        'light-on-error': '#FFFFFF',
+        'light-error-container': '#FFDAD6',
+        'light-on-error-container': '#93000A',
+        'light-background': '#F8F9FF',
+        'light-on-background': '#0B1C30',
+        'light-surface': '#F8F9FF',
+        'light-surface-dim': '#CBDBF5',
+        'light-surface-bright': '#F8F9FF',
+        'light-surface-container-lowest': '#FFFFFF',
+        'light-surface-container-low': '#EFF4FF',
+        'light-surface-container': '#E5EEFF',
+        'light-surface-container-high': '#DCE9FF',
+        'light-surface-container-highest': '#D3E4FE',
+        'light-on-surface': '#0B1C30',
+        'light-surface-variant': '#E0E1F4',
+        'light-on-surface-variant': '#434655',
+        'light-outline': '#747686',
+        'light-outline-variant': '#C4C5D7',
+        'light-inverse-surface': '#213145',
+        'light-inverse-on-surface': '#EAF1FF',
+        'light-inverse-primary': '#B7C4FF',
+        'light-shadow': '#000000',
+        'light-scrim': '#000000',
+        'light-warning': '#904D00',
+        'light-on-warning': '#FFFFFF',
+        'light-warning-container': '#FFDCC3',
+        'light-on-warning-container': '#2F1500',
+        'light-success': '#006C4A',
+        'light-on-success': '#FFFFFF',
+        'light-success-container': '#85F8C4',
+        'light-on-success-container': '#002114',
+        'dark-primary': '#B7C4FF',
+        'dark-on-primary': '#002682',
+        'dark-primary-container': '#1D4ED8',
+        'dark-on-primary-container': '#CAD3FF',
+        'dark-secondary': '#6CD3F7',
+        'dark-on-secondary': '#003543',
+        'dark-secondary-container': '#269DBE',
+        'dark-on-secondary-container': '#001F29',
+        'dark-tertiary': '#D3BBFF',
+        'dark-on-tertiary': '#3F008D',
+        'dark-tertiary-container': '#712EDD',
+        'dark-on-tertiary-container': '#DFCDFF',
+        'dark-error': '#FFB4AB',
+        'dark-on-error': '#690005',
+        'dark-error-container': '#93000A',
+        'dark-on-error-container': '#FFDAD6',
+        'dark-background': '#031427',
+        'dark-on-background': '#D3E4FE',
+        'dark-surface': '#031427',
+        'dark-surface-dim': '#031427',
+        'dark-surface-bright': '#2A3A4F',
+        'dark-surface-container-lowest': '#000F21',
+        'dark-surface-container-low': '#0B1C30',
+        'dark-surface-container': '#102034',
+        'dark-surface-container-high': '#1B2B3F',
+        'dark-surface-container-highest': '#26364A',
+        'dark-on-surface': '#D3E4FE',
+        'dark-surface-variant': '#434655',
+        'dark-on-surface-variant': '#C4C5D7',
+        'dark-outline': '#8E90A0',
+        'dark-outline-variant': '#434655',
+        'dark-inverse-surface': '#D3E4FE',
+        'dark-inverse-on-surface': '#213145',
+        'dark-inverse-primary': '#2151DA',
+        'dark-shadow': '#000000',
+        'dark-scrim': '#000000',
+        'dark-warning': '#FFB77D',
+        'dark-on-warning': '#4D2600',
+        'dark-warning-container': '#6E3900',
+        'dark-on-warning-container': '#FFDCC3',
+        'dark-success': '#68DBA9',
+        'dark-on-success': '#003825',
+        'dark-success-container': '#005137',
+        'dark-on-success-container': '#85F8C4',
+      },
+      borderRadius: {
+        'sm': '6px',
+        'DEFAULT': '8px',
+        'md': '12px',
+        'lg': '16px',
+        'xl': '24px',
+        'full': '9999px',
+      },
+      spacing: {
+        'gutter-xs': '4px',
+        'gutter-sm': '8px',
+        'gutter-md': '16px',
+        'gutter-lg': '24px',
+        'gutter-xl': '32px',
+        'section': '64px',
+        'page-margin': '32px',
+      },
+      fontFamily: {
+        'display': ['"Geist"', 'sans-serif'],
+        'headline': ['"Geist"', 'sans-serif'],
+        'title': ['"Geist"', 'sans-serif'],
+        'body': ['"Geist"', 'sans-serif'],
+        'label': ['"Geist"', 'sans-serif'],
+        'mono': ['"Geist Mono"', 'monospace'],
+      },
+      fontSize: {
+        'display-lg': ['56px', { lineHeight: '62px', letterSpacing: '-1.5px', fontWeight: '600' }],
+        'display-lg-mobile': ['32px', { lineHeight: '38px', letterSpacing: '-0.75px', fontWeight: '600' }],
+        'display-md': ['40px', { lineHeight: '46px', letterSpacing: '-1px', fontWeight: '600' }],
+        'display-md-mobile': ['28px', { lineHeight: '34px', letterSpacing: '-0.5px', fontWeight: '600' }],
+        'headline-lg': ['28px', { lineHeight: '34px', letterSpacing: '-0.5px', fontWeight: '600' }],
+        'headline-md': ['22px', { lineHeight: '28px', letterSpacing: '-0.3px', fontWeight: '600' }],
+        'title-lg': ['18px', { lineHeight: '24px', letterSpacing: '-0.2px', fontWeight: '600' }],
+        'title-md': ['15px', { lineHeight: '22px', letterSpacing: '-0.1px', fontWeight: '600' }],
+        'body-lg': ['16px', { lineHeight: '26px', letterSpacing: '0px', fontWeight: '400' }],
+        'body-md': ['14px', { lineHeight: '22px', letterSpacing: '0px', fontWeight: '400' }],
+        'body-sm': ['13px', { lineHeight: '19px', letterSpacing: '0px', fontWeight: '400' }],
+        'label-lg': ['14px', { lineHeight: '20px', letterSpacing: '0px', fontWeight: '500' }],
+        'label-md': ['12px', { lineHeight: '16px', letterSpacing: '0.1px', fontWeight: '500' }],
+        'label-sm': ['11px', { lineHeight: '14px', letterSpacing: '0.2px', fontWeight: '500' }],
+        'mono-sm': ['13px', { lineHeight: '20px', letterSpacing: '0px', fontWeight: '400' }],
+        'mono-xs': ['11px', { lineHeight: '16px', letterSpacing: '0px', fontWeight: '500' }],
+      },
+      transitionDuration: {
+        'state-change': '120ms',
+        'standard-interaction': '200ms',
+        'panel-slide': '280ms',
+        'surface-enter': '360ms',
+        'brand-transition': '560ms',
+        'surface-exit': '160ms',
+      },
+      transitionDelay: {
+        'state-change': '0ms',
+        'standard-interaction': '0ms',
+        'panel-slide': '0ms',
+        'surface-enter': '0ms',
+        'brand-transition': '0ms',
+        'surface-exit': '0ms',
+      },
+      transitionTimingFunction: {
+        'state-change': 'cubic-bezier(0.2, 0, 0, 1)',
+        'standard-interaction': 'cubic-bezier(0.2, 0, 0, 1)',
+        'panel-slide': 'cubic-bezier(0.16, 1, 0.3, 1)',
+        'surface-enter': 'cubic-bezier(0.16, 1, 0.3, 1)',
+        'brand-transition': 'cubic-bezier(0.16, 1, 0.3, 1)',
+        'surface-exit': 'cubic-bezier(0.4, 0, 1, 1)',
+      },
+    },
+  },
+};
+if (typeof module !== 'undefined') module.exports = globalThis.tailwind.config;
+</script>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=Geist+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet">
+  <style>
+    .material-symbols-outlined, .material-symbols-rounded, .material-symbols-sharp, .material-icons { display: inline-block; width: 1em; height: 1em; line-height: 1 !important; box-sizing: content-box; overflow: hidden; white-space: nowrap; direction: ltr; vertical-align: middle; }
+    @keyframes inspectorSlide {
+      from { opacity: 0; transform: translateX(16px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    .animate-inspector { animation: inspectorSlide 280ms cubic-bezier(0.16, 1, 0.3, 1) both; }
+    @media (prefers-reduced-motion: reduce) {
+      .animate-inspector { animation: none; }
+    }
+  </style>
+</head>
+<body class="bg-light-surface text-light-on-surface font-body antialiased">
+  <div class="min-h-[1024px] flex bg-light-surface" data-stitch-vh="min-h-[1024px]===min-h-screen">
+
+    <!-- Persistent Left Application Rail -->
+    <aside class="w-64 shrink-0 min-h-[1024px] bg-light-surface-container-low border-r border-light-outline-variant/70 flex flex-col justify-between p-4" data-stitch-vh="min-h-[1024px]===min-h-screen">
+      <div class="flex flex-col gap-6">
+        <div class="flex items-center justify-between gap-2 px-2 pt-1">
+          <a href="../about-flagship/AboutFlagship.html" class="flex items-center gap-2 shrink-0">
+            <svg width="24" height="24" viewBox="0 0 28 28" fill="none" aria-hidden="true" class="shrink-0">
+              <rect width="28" height="28" rx="7" fill="#0037B0"></rect>
+              <path d="M8.5 9.5C8.5 8.67157 9.17157 8 10 8H15.5L19.5 12V18.5C19.5 19.3284 18.8284 20 18 20H10C9.17157 20 8.5 19.3284 8.5 18.5V9.5Z" stroke="#FFFFFF" stroke-width="1.6"></path>
+              <path d="M15 8V12.5H19.5" stroke="#76DCFF" stroke-width="1.6" stroke-linejoin="round"></path>
+              <circle cx="13" cy="15.5" r="1.5" fill="#76DCFF"></circle>
+            </svg>
+            <span data-design-text-token="title-md" class="font-title text-title-md text-light-on-surface whitespace-nowrap">Research Copilot</span>
+          </a>
+          <button type="button" aria-label="Collapse sidebar" class="p-1.5 rounded text-light-on-surface-variant hover:bg-light-surface-container active:scale-[0.96] transition-all duration-state-change">
+            <span class="material-symbols-outlined text-[18px]" aria-hidden="true">dock_to_right</span>
+          </button>
+        </div>
+
+        <nav aria-label="Primary" class="flex flex-col gap-1">
+          <a href="../workspace-inspector/WorkspaceInspector.html" aria-current="page" class="flex items-center gap-3 px-3 py-2 rounded bg-light-surface-container-lowest text-light-primary shadow-sm border border-light-outline-variant/60">
+            <span class="material-symbols-outlined text-[19px]" style="font-variation-settings: &#39;FILL&#39; 1;" aria-hidden="true">forum</span>
+            <span data-design-text-token="label-lg" class="font-label text-label-lg">Workspace</span>
+          </a>
+          <a href="../knowledge-base/KnowledgeBase.html" class="flex items-center gap-3 px-3 py-2 rounded text-light-on-surface-variant hover:bg-light-surface-container hover:text-light-on-surface transition-colors duration-state-change">
+            <span class="material-symbols-outlined text-[19px]" aria-hidden="true">library_books</span>
+            <span data-design-text-token="label-lg" class="font-label text-label-lg">Knowledge Base</span>
+          </a>
+          <a href="../settings/Settings.html" class="flex items-center gap-3 px-3 py-2 rounded text-light-on-surface-variant hover:bg-light-surface-container hover:text-light-on-surface transition-colors duration-state-change">
+            <span class="material-symbols-outlined text-[19px]" aria-hidden="true">tune</span>
+            <span data-design-text-token="label-lg" class="font-label text-label-lg">Settings</span>
+          </a>
+          <a href="../about-flagship/AboutFlagship.html" class="flex items-center gap-3 px-3 py-2 rounded text-light-on-surface-variant hover:bg-light-surface-container hover:text-light-on-surface transition-colors duration-state-change">
+            <span class="material-symbols-outlined text-[19px]" aria-hidden="true">info</span>
+            <span data-design-text-token="label-lg" class="font-label text-label-lg">About</span>
+          </a>
+        </nav>
+      </div>
+
+      <div class="flex flex-col gap-2 pt-4 border-t border-light-outline-variant/60">
+        <div class="flex items-center justify-between px-2.5 py-2 rounded bg-light-surface-container-lowest border border-light-outline-variant/70">
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-light-warning" aria-hidden="true"></span>
+            <span data-design-text-token="label-md" class="font-label text-label-md text-light-on-surface">Paused · Gate</span>
+          </div>
+          <span data-design-text-token="mono-xs" class="font-mono text-mono-xs text-light-on-surface-variant">EN</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Conversation Column -->
+    <div class="flex-1 flex flex-col min-w-0">
+      <header class="h-14 px-6 border-b border-light-outline-variant/60 bg-light-surface-container-lowest flex items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <h1 data-design-text-token="title-md" class="font-title text-title-md text-light-on-surface">Attention Complexity &amp; IO</h1>
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-light-warning-container text-light-on-warning-container font-label text-label-sm">
+            Awaiting Approval
+          </span>
+        </div>
+
+        <a href="../workspace-active/WorkspaceActive.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded border border-light-primary bg-light-surface-container-low text-light-primary active:scale-[0.98] transition-all duration-state-change">
+          <span class="material-symbols-outlined text-[18px]" aria-hidden="true">dock_to_left</span>
+          <span data-design-text-token="label-md" class="font-label text-label-md">Close Inspector</span>
+        </a>
+      </header>
+
+      <main class="flex-1 overflow-y-auto px-8 py-8 flex flex-col gap-6">
+        <div class="max-w-2xl mx-auto w-full flex flex-col gap-6">
+          <div class="rounded-lg px-5 py-3.5 bg-light-surface-container-low border border-light-outline-variant/70 self-end max-w-xl">
+            <p data-design-text-token="body-md" class="font-body text-body-md text-light-on-surface">
+              Write a summary note of the FlashAttention-2 memory hierarchy findings to my local research workspace.
+            </p>
+          </div>
+
+          <div class="rounded-lg p-5 bg-light-surface-container-lowest border border-light-warning/50 shadow-sm flex flex-col gap-4">
+            <div class="flex items-center justify-between gap-4">
+              <div class="flex items-center gap-2.5">
+                <span class="material-symbols-outlined text-[20px] text-light-warning" aria-hidden="true">verified_user</span>
+                <span data-design-text-token="title-md" class="font-title text-title-md text-light-on-surface">Authorized Editing Approval Required</span>
+              </div>
+              <span data-design-text-token="mono-xs" class="font-mono text-mono-xs text-light-on-surface-variant">tool: write_markdown_note</span>
+            </div>
+            <p data-design-text-token="body-md" class="font-body text-body-md text-light-on-surface-variant">
+              The agent requests permission to save <span class="font-mono text-mono-xs text-light-on-surface">notes/flashattention_io_summary.md</span> to your local workspace.
+            </p>
+            <div class="flex items-center gap-3">
+              <button data-component-id="button-primary" data-component-type="button" data-component-variant="primary" type="button" class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded bg-light-primary text-light-on-primary hover:bg-light-primary-container active:scale-[0.98] transition-all duration-state-change">
+                <span data-design-text-token="label-lg" class="font-label text-label-lg">Approve Tool Run</span>
+              </button>
+              <button type="button" class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded border border-light-outline-variant bg-light-surface-container-lowest text-light-on-surface hover:bg-light-surface-container-low active:scale-[0.98] transition-all duration-state-change">
+                <span data-design-text-token="label-lg" class="font-label text-label-lg">Cancel</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- Collapsible Right-Hand Agent Inspector (360px) -->
+    <aside aria-label="Agent Inspector" class="animate-inspector w-96 shrink-0 min-h-[1024px] bg-light-surface-container-low border-l border-light-outline-variant/70 flex flex-col justify-between p-5 gap-6" data-stitch-vh="min-h-[1024px]===min-h-screen">
+      <div class="flex flex-col gap-5">
+        <div class="flex items-center justify-between border-b border-light-outline-variant/60 pb-3">
+          <div class="flex flex-col gap-0.5">
+            <h2 data-design-text-token="title-md" class="font-title text-title-md text-light-on-surface">Agent Inspector</h2>
+            <span data-design-text-token="mono-xs" class="font-mono text-mono-xs text-light-on-surface-variant">run_id: rca_09f4a2</span>
+          </div>
+          <div class="flex items-center gap-1">
+            <button type="button" aria-label="Resume execution" class="p-1.5 rounded bg-light-surface-container-lowest border border-light-outline-variant text-light-primary hover:bg-light-surface-container">
+              <span class="material-symbols-outlined text-[18px]" aria-hidden="true">play_arrow</span>
+            </button>
+            <button type="button" aria-label="Cancel execution" class="p-1.5 rounded bg-light-surface-container-lowest border border-light-outline-variant text-light-error hover:bg-light-error-container">
+              <span class="material-symbols-outlined text-[18px]" aria-hidden="true">stop</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="rounded-md p-4 bg-light-surface-container-lowest border border-light-outline-variant/80 flex flex-col gap-3">
+          <div class="flex items-center justify-between">
+            <span data-design-text-token="label-md" class="font-label text-label-md text-light-on-surface">Model Routing</span>
+            <span class="px-2 py-0.5 rounded bg-light-tertiary-container/20 text-light-tertiary font-mono text-mono-xs">Complex Tier</span>
+          </div>
+          <div class="grid grid-cols-2 gap-3 pt-1">
+            <div class="flex flex-col">
+              <span data-design-text-token="label-sm" class="font-label text-label-sm text-light-on-surface-variant">Active Model</span>
+              <span data-design-text-token="mono-sm" class="font-mono text-mono-sm text-light-on-surface">gpt-4.1</span>
+            </div>
+            <div class="flex flex-col">
+              <span data-design-text-token="label-sm" class="font-label text-label-sm text-light-on-surface-variant">TTFT Latency</span>
+              <span data-design-text-token="mono-sm" class="font-mono text-mono-sm text-light-on-surface tabular-nums">312 ms</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="rounded-md p-4 bg-light-surface-container-lowest border border-light-outline-variant/80 flex flex-col gap-3">
+          <div class="flex items-center justify-between">
+            <span data-design-text-token="label-md" class="font-label text-label-md text-light-on-surface">Context Assembly</span>
+            <span data-design-text-token="mono-xs" class="font-mono text-mono-xs text-light-on-surface-variant tabular-nums">6,840 / 32,000 tok</span>
+          </div>
+          <div class="w-full h-2 rounded-full bg-light-surface-container overflow-hidden flex">
+            <div class="h-full bg-light-primary w-2/12" title="System &amp; Tools"></div>
+            <div class="h-full bg-light-secondary w-3/12" title="Retrieved Fragments"></div>
+            <div class="h-full bg-light-tertiary w-1/12" title="Archived Recall"></div>
+          </div>
+          <div class="flex items-center justify-between text-light-on-surface-variant">
+            <span data-design-text-token="mono-xs" class="font-mono text-mono-xs">System 1.1k · RAG 4.3k</span>
+            <span data-design-text-token="mono-xs" class="font-mono text-mono-xs">Recall 1.4k</span>
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-2.5">
+          <span data-design-text-token="label-md" class="font-label text-label-md text-light-on-surface-variant">Execution Events</span>
+          <ol class="flex flex-col gap-2.5 border-l-2 border-light-outline-variant pl-3.5 ml-1.5">
+            <li class="flex items-start justify-between gap-2">
+              <div class="flex flex-col">
+                <span data-design-text-token="body-sm" class="font-body text-body-sm text-light-on-surface">Hybrid Retrieval · 6 fragments</span>
+                <span data-design-text-token="mono-xs" class="font-mono text-mono-xs text-light-on-surface-variant">BM25 + Dense Cosine</span>
+              </div>
+              <span data-design-text-token="mono-xs" class="font-mono text-mono-xs text-light-success tabular-nums">48ms</span>
+            </li>
+            <li class="flex items-start justify-between gap-2">
+              <div class="flex flex-col">
+                <span data-design-text-token="body-sm" class="font-body text-body-sm text-light-on-surface">Context Archive Recall</span>
+                <span data-design-text-token="mono-xs" class="font-mono text-mono-xs text-light-on-surface-variant">2 prior turns restored</span>
+              </div>
+              <span data-design-text-token="mono-xs" class="font-mono text-mono-xs text-light-success tabular-nums">19ms</span>
+            </li>
+            <li class="flex items-start justify-between gap-2">
+              <div class="flex flex-col">
+                <span data-design-text-token="label-md" class="font-label text-label-md text-light-warning">Tool Gate · write_markdown_note</span>
+                <span data-design-text-token="mono-xs" class="font-mono text-mono-xs text-light-on-surface-variant">Awaiting user approval</span>
+              </div>
+              <span data-design-text-token="mono-xs" class="font-mono text-mono-xs text-light-warning">Paused</span>
+            </li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="pt-3 border-t border-light-outline-variant/60 flex items-center justify-between">
+        <span data-design-text-token="mono-xs" class="font-mono text-mono-xs text-light-on-surface-variant">SSE Stream · Connected</span>
+        <span data-design-text-token="mono-xs" class="font-mono text-mono-xs text-light-on-surface-variant tabular-nums">12.4 tok/s</span>
+      </div>
+    </aside>
+
+  </div>
+
+
+</body></html>

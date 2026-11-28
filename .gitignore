@@ -1,0 +1,69 @@
+# Python caches and test outputs
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# Private configuration
+.env
+.env.*
+!.env.example
+config.local.yaml
+
+# Virtual environments and dependencies
+.venv/
+venv/
+env/
+node_modules/
+
+# IDE / local agent settings
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.claude/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Build outputs
+*.egg-info/
+dist/
+build/
+*.egg
+
+# User research data, generated experiments, and local backups
+data/
+artifacts/
+.local-backups/
+
+# Local research inputs and runtime files, including custom output paths
+*.pdf
+*.sqlite
+*.sqlite3
+*.sqlite-*
+*.sqlite3-*
+*.db
+*.db-*
+*.jsonl
+*.log
+logs/
+uploads/
+checkpoints/
+
+# Local credentials, certificates and editor backups
+*.local.yaml
+*.local.yml
+.envrc
+*.pem
+*.key
+*.p12
+*.pfx
+*.bak
+*.orig

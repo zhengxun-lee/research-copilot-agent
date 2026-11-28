@@ -1,0 +1,348 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings — Research Copilot Agent</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">/** @type {import('tailwindcss').Config} */
+globalThis.tailwind = globalThis.tailwind || {};
+globalThis.tailwind.config = {
+  darkMode: 'class',
+  theme: {
+    extend: {
+      colors: {
+        'light-primary': '#0037B0',
+        'light-on-primary': '#FFFFFF',
+        'light-primary-container': '#1D4ED8',
+        'light-on-primary-container': '#CAD3FF',
+        'light-secondary': '#006780',
+        'light-on-secondary': '#FFFFFF',
+        'light-secondary-container': '#76DCFF',
+        'light-on-secondary-container': '#006077',
+        'light-tertiary': '#5800C0',
+        'light-on-tertiary': '#FFFFFF',
+        'light-tertiary-container': '#712EDD',
+        'light-on-tertiary-container': '#DFCDFF',
+        'light-error': '#BA1A1A',
+        'light-on-error': '#FFFFFF',
+        'light-error-container': '#FFDAD6',
+        'light-on-error-container': '#93000A',
+        'light-background': '#F8F9FF',
+        'light-on-background': '#0B1C30',
+        'light-surface': '#F8F9FF',
+        'light-surface-dim': '#CBDBF5',
+        'light-surface-bright': '#F8F9FF',
+        'light-surface-container-lowest': '#FFFFFF',
+        'light-surface-container-low': '#EFF4FF',
+        'light-surface-container': '#E5EEFF',
+        'light-surface-container-high': '#DCE9FF',
+        'light-surface-container-highest': '#D3E4FE',
+        'light-on-surface': '#0B1C30',
+        'light-surface-variant': '#E0E1F4',
+        'light-on-surface-variant': '#434655',
+        'light-outline': '#747686',
+        'light-outline-variant': '#C4C5D7',
+        'light-inverse-surface': '#213145',
+        'light-inverse-on-surface': '#EAF1FF',
+        'light-inverse-primary': '#B7C4FF',
+        'light-shadow': '#000000',
+        'light-scrim': '#000000',
+        'light-warning': '#904D00',
+        'light-on-warning': '#FFFFFF',
+        'light-warning-container': '#FFDCC3',
+        'light-on-warning-container': '#2F1500',
+        'light-success': '#006C4A',
+        'light-on-success': '#FFFFFF',
+        'light-success-container': '#85F8C4',
+        'light-on-success-container': '#002114',
+        'dark-primary': '#B7C4FF',
+        'dark-on-primary': '#002682',
+        'dark-primary-container': '#1D4ED8',
+        'dark-on-primary-container': '#CAD3FF',
+        'dark-secondary': '#6CD3F7',
+        'dark-on-secondary': '#003543',
+        'dark-secondary-container': '#269DBE',
+        'dark-on-secondary-container': '#001F29',
+        'dark-tertiary': '#D3BBFF',
+        'dark-on-tertiary': '#3F008D',
+        'dark-tertiary-container': '#712EDD',
+        'dark-on-tertiary-container': '#DFCDFF',
+        'dark-error': '#FFB4AB',
+        'dark-on-error': '#690005',
+        'dark-error-container': '#93000A',
+        'dark-on-error-container': '#FFDAD6',
+        'dark-background': '#031427',
+        'dark-on-background': '#D3E4FE',
+        'dark-surface': '#031427',
+        'dark-surface-dim': '#031427',
+        'dark-surface-bright': '#2A3A4F',
+        'dark-surface-container-lowest': '#000F21',
+        'dark-surface-container-low': '#0B1C30',
+        'dark-surface-container': '#102034',
+        'dark-surface-container-high': '#1B2B3F',
+        'dark-surface-container-highest': '#26364A',
+        'dark-on-surface': '#D3E4FE',
+        'dark-surface-variant': '#434655',
+        'dark-on-surface-variant': '#C4C5D7',
+        'dark-outline': '#8E90A0',
+        'dark-outline-variant': '#434655',
+        'dark-inverse-surface': '#D3E4FE',
+        'dark-inverse-on-surface': '#213145',
+        'dark-inverse-primary': '#2151DA',
+        'dark-shadow': '#000000',
+        'dark-scrim': '#000000',
+        'dark-warning': '#FFB77D',
+        'dark-on-warning': '#4D2600',
+        'dark-warning-container': '#6E3900',
+        'dark-on-warning-container': '#FFDCC3',
+        'dark-success': '#68DBA9',
+        'dark-on-success': '#003825',
+        'dark-success-container': '#005137',
+        'dark-on-success-container': '#85F8C4',
+      },
+      borderRadius: {
+        'sm': '6px',
+        'DEFAULT': '8px',
+        'md': '12px',
+        'lg': '16px',
+        'xl': '24px',
+        'full': '9999px',
+      },
+      spacing: {
+        'gutter-xs': '4px',
+        'gutter-sm': '8px',
+        'gutter-md': '16px',
+        'gutter-lg': '24px',
+        'gutter-xl': '32px',
+        'section': '64px',
+        'page-margin': '32px',
+      },
+      fontFamily: {
+        'display': ['"Geist"', 'sans-serif'],
+        'headline': ['"Geist"', 'sans-serif'],
+        'title': ['"Geist"', 'sans-serif'],
+        'body': ['"Geist"', 'sans-serif'],
+        'label': ['"Geist"', 'sans-serif'],
+        'mono': ['"Geist Mono"', 'monospace'],
+      },
+      fontSize: {
+        'display-lg': ['56px', { lineHeight: '62px', letterSpacing: '-1.5px', fontWeight: '600' }],
+        'display-lg-mobile': ['32px', { lineHeight: '38px', letterSpacing: '-0.75px', fontWeight: '600' }],
+        'display-md': ['40px', { lineHeight: '46px', letterSpacing: '-1px', fontWeight: '600' }],
+        'display-md-mobile': ['28px', { lineHeight: '34px', letterSpacing: '-0.5px', fontWeight: '600' }],
+        'headline-lg': ['28px', { lineHeight: '34px', letterSpacing: '-0.5px', fontWeight: '600' }],
+        'headline-md': ['22px', { lineHeight: '28px', letterSpacing: '-0.3px', fontWeight: '600' }],
+        'title-lg': ['18px', { lineHeight: '24px', letterSpacing: '-0.2px', fontWeight: '600' }],
+        'title-md': ['15px', { lineHeight: '22px', letterSpacing: '-0.1px', fontWeight: '600' }],
+        'body-lg': ['16px', { lineHeight: '26px', letterSpacing: '0px', fontWeight: '400' }],
+        'body-md': ['14px', { lineHeight: '22px', letterSpacing: '0px', fontWeight: '400' }],
+        'body-sm': ['13px', { lineHeight: '19px', letterSpacing: '0px', fontWeight: '400' }],
+        'label-lg': ['14px', { lineHeight: '20px', letterSpacing: '0px', fontWeight: '500' }],
+        'label-md': ['12px', { lineHeight: '16px', letterSpacing: '0.1px', fontWeight: '500' }],
+        'label-sm': ['11px', { lineHeight: '14px', letterSpacing: '0.2px', fontWeight: '500' }],
+        'mono-sm': ['13px', { lineHeight: '20px', letterSpacing: '0px', fontWeight: '400' }],
+        'mono-xs': ['11px', { lineHeight: '16px', letterSpacing: '0px', fontWeight: '500' }],
+      },
+      transitionDuration: {
+        'state-change': '120ms',
+        'standard-interaction': '200ms',
+        'panel-slide': '280ms',
+        'surface-enter': '360ms',
+        'brand-transition': '560ms',
+        'surface-exit': '160ms',
+      },
+      transitionDelay: {
+        'state-change': '0ms',
+        'standard-interaction': '0ms',
+        'panel-slide': '0ms',
+        'surface-enter': '0ms',
+        'brand-transition': '0ms',
+        'surface-exit': '0ms',
+      },
+      transitionTimingFunction: {
+        'state-change': 'cubic-bezier(0.2, 0, 0, 1)',
+        'standard-interaction': 'cubic-bezier(0.2, 0, 0, 1)',
+        'panel-slide': 'cubic-bezier(0.16, 1, 0.3, 1)',
+        'surface-enter': 'cubic-bezier(0.16, 1, 0.3, 1)',
+        'brand-transition': 'cubic-bezier(0.16, 1, 0.3, 1)',
+        'surface-exit': 'cubic-bezier(0.4, 0, 1, 1)',
+      },
+    },
+  },
+};
+if (typeof module !== 'undefined') module.exports = globalThis.tailwind.config;
+</script>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=Geist+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet">
+  <style>.material-symbols-outlined, .material-symbols-rounded, .material-symbols-sharp, .material-icons { display: inline-block; width: 1em; height: 1em; line-height: 1 !important; box-sizing: content-box; overflow: hidden; white-space: nowrap; direction: ltr; vertical-align: middle; }</style>
+</head>
+<body class="bg-light-surface text-light-on-surface font-body antialiased">
+  <div class="min-h-[1024px] flex bg-light-surface" data-stitch-vh="min-h-[1024px]===min-h-screen">
+
+    <!-- Persistent Left Application Rail -->
+    <aside class="w-64 shrink-0 min-h-[1024px] bg-light-surface-container-low border-r border-light-outline-variant/70 flex flex-col justify-between p-4" data-stitch-vh="min-h-[1024px]===min-h-screen">
+      <div class="flex flex-col gap-6">
+        <div class="flex items-center justify-between gap-2 px-2 pt-1">
+          <a href="../about-flagship/AboutFlagship.html" class="flex items-center gap-2 shrink-0">
+            <svg width="24" height="24" viewBox="0 0 28 28" fill="none" aria-hidden="true" class="shrink-0">
+              <rect width="28" height="28" rx="7" fill="#0037B0"></rect>
+              <path d="M8.5 9.5C8.5 8.67157 9.17157 8 10 8H15.5L19.5 12V18.5C19.5 19.3284 18.8284 20 18 20H10C9.17157 20 8.5 19.3284 8.5 18.5V9.5Z" stroke="#FFFFFF" stroke-width="1.6"></path>
+              <path d="M15 8V12.5H19.5" stroke="#76DCFF" stroke-width="1.6" stroke-linejoin="round"></path>
+              <circle cx="13" cy="15.5" r="1.5" fill="#76DCFF"></circle>
+            </svg>
+            <span data-design-text-token="title-md" class="font-title text-title-md text-light-on-surface whitespace-nowrap">Research Copilot</span>
+          </a>
+          <button type="button" aria-label="Collapse sidebar" class="p-1.5 rounded text-light-on-surface-variant hover:bg-light-surface-container">
+            <span class="material-symbols-outlined text-[18px]" aria-hidden="true">dock_to_right</span>
+          </button>
+        </div>
+
+        <nav aria-label="Primary" class="flex flex-col gap-1">
+          <a href="../workspace-active/WorkspaceActive.html" class="flex items-center gap-3 px-3 py-2 rounded text-light-on-surface-variant hover:bg-light-surface-container hover:text-light-on-surface">
+            <span class="material-symbols-outlined text-[19px]" aria-hidden="true">forum</span>
+            <span data-design-text-token="label-lg" class="font-label text-label-lg">Workspace</span>
+          </a>
+          <a href="../knowledge-base/KnowledgeBase.html" class="flex items-center gap-3 px-3 py-2 rounded text-light-on-surface-variant hover:bg-light-surface-container hover:text-light-on-surface">
+            <span class="material-symbols-outlined text-[19px]" aria-hidden="true">library_books</span>
+            <span data-design-text-token="label-lg" class="font-label text-label-lg">Knowledge Base</span>
+          </a>
+          <a href="../settings/Settings.html" aria-current="page" class="flex items-center gap-3 px-3 py-2 rounded bg-light-surface-container-lowest text-light-primary shadow-sm border border-light-outline-variant/60">
+            <span class="material-symbols-outlined text-[19px]" style="font-variation-settings: &#39;FILL&#39; 1;" aria-hidden="true">tune</span>
+            <span data-design-text-token="label-lg" class="font-label text-label-lg">Settings</span>
+          </a>
+          <a href="../about-flagship/AboutFlagship.html" class="flex items-center gap-3 px-3 py-2 rounded text-light-on-surface-variant hover:bg-light-surface-container hover:text-light-on-surface">
+            <span class="material-symbols-outlined text-[19px]" aria-hidden="true">info</span>
+            <span data-design-text-token="label-lg" class="font-label text-label-lg">About</span>
+          </a>
+        </nav>
+      </div>
+
+      <div class="flex flex-col gap-2 pt-4 border-t border-light-outline-variant/60">
+        <div class="flex items-center justify-between px-2.5 py-2 rounded bg-light-surface-container-lowest border border-light-outline-variant/70">
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-light-success" aria-hidden="true"></span>
+            <span data-design-text-token="label-md" class="font-label text-label-md text-light-on-surface">Local Engine</span>
+          </div>
+          <span data-design-text-token="mono-xs" class="font-mono text-mono-xs text-light-on-surface-variant">EN</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Settings Content -->
+    <main class="flex-1 overflow-y-auto px-10 py-10">
+      <div class="max-w-3xl mx-auto flex flex-col gap-10">
+        <header class="flex items-center justify-between gap-6 border-b border-light-outline-variant/60 pb-6">
+          <div class="flex flex-col gap-1">
+            <h1 data-design-text-token="headline-lg" class="font-headline text-headline-lg text-light-on-surface">Settings</h1>
+            <p data-design-text-token="body-md" class="font-body text-body-md text-light-on-surface-variant">
+              Configure OpenAI-compatible endpoints, model routing tiers, embeddings, and local execution policies.
+            </p>
+          </div>
+          <div class="flex items-center gap-3 shrink-0">
+            <span id="save-status" class="hidden items-center gap-1.5 px-2.5 py-1 rounded-full bg-light-success-container text-light-on-success-container font-label text-label-sm">
+              Saved locally
+            </span>
+            <button id="save-settings-btn" data-component-id="button-primary" data-component-type="button" data-component-variant="primary" type="button" class="shrink-0 inline-flex items-center gap-2 px-4 py-2.5 rounded bg-light-primary text-light-on-primary shadow-sm hover:bg-light-primary-container active:scale-[0.98] transition-all duration-state-change whitespace-nowrap">
+              <span data-design-text-token="label-lg" class="font-label text-label-lg">Save Configuration</span>
+            </button>
+          </div>
+        </header>
+
+        <section class="flex flex-col gap-5 pb-8 border-b border-light-outline-variant/60">
+          <div class="flex items-center justify-between">
+            <h2 data-design-text-token="title-lg" class="font-title text-title-lg text-light-on-surface">API Connection</h2>
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-light-success-container text-light-on-success-container font-label text-label-sm">
+              Connected
+            </span>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <label class="flex flex-col gap-1.5">
+              <span data-design-text-token="label-md" class="font-label text-label-md text-light-on-surface">Base URL</span>
+              <input type="url" value="https://api.openai.com/v1" class="rounded px-3.5 py-2.5 bg-light-surface-container-lowest border border-light-outline-variant font-mono text-mono-sm text-light-on-surface focus:border-light-primary focus:ring-2 focus:ring-light-primary/20 transition-colors duration-state-change">
+            </label>
+            <label class="flex flex-col gap-1.5">
+              <span data-design-text-token="label-md" class="font-label text-label-md text-light-on-surface">API Key</span>
+              <input type="password" value="sk-proj-••••••••••••••••••••••••" class="rounded px-3.5 py-2.5 bg-light-surface-container-lowest border border-light-outline-variant font-mono text-mono-sm text-light-on-surface focus:border-light-primary focus:ring-2 focus:ring-light-primary/20 transition-colors duration-state-change">
+            </label>
+          </div>
+        </section>
+
+        <section class="flex flex-col gap-5 pb-8 border-b border-light-outline-variant/60">
+          <div class="flex items-center justify-between gap-4">
+            <div class="flex flex-col gap-0.5">
+              <h2 data-design-text-token="title-lg" class="font-title text-title-lg text-light-on-surface">Model Configuration &amp; Routing</h2>
+              <p data-design-text-token="body-sm" class="font-body text-body-sm text-light-on-surface-variant">Route simple factual lookups to faster models and reserve reasoning models for multi-paper synthesis.</p>
+            </div>
+            <label class="inline-flex items-center gap-2.5 cursor-pointer shrink-0">
+              <input type="checkbox" checked class="rounded border-light-outline-variant text-light-primary focus:ring-light-primary">
+              <span data-design-text-token="label-md" class="font-label text-label-md text-light-on-surface whitespace-nowrap">Automatic Routing</span>
+            </label>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <label class="flex flex-col gap-1.5">
+              <span data-design-text-token="label-md" class="font-label text-label-md text-light-on-surface">Default Model</span>
+              <input type="text" value="gpt-4.1" class="rounded px-3.5 py-2.5 bg-light-surface-container-lowest border border-light-outline-variant font-mono text-mono-sm text-light-on-surface">
+            </label>
+            <label class="flex flex-col gap-1.5">
+              <span data-design-text-token="label-md" class="font-label text-label-md text-light-on-surface">Embedding Model</span>
+              <input type="text" value="text-embedding-3-small" class="rounded px-3.5 py-2.5 bg-light-surface-container-lowest border border-light-outline-variant font-mono text-mono-sm text-light-on-surface">
+            </label>
+            <label class="flex flex-col gap-1.5">
+              <span data-design-text-token="label-md" class="font-label text-label-md text-light-on-surface">Simple Query Model</span>
+              <input type="text" value="gpt-4.1-mini" class="rounded px-3.5 py-2.5 bg-light-surface-container-lowest border border-light-outline-variant font-mono text-mono-sm text-light-on-surface">
+            </label>
+            <label class="flex flex-col gap-1.5">
+              <span data-design-text-token="label-md" class="font-label text-label-md text-light-on-surface">Complex Synthesis Model</span>
+              <input type="text" value="gpt-4.1" class="rounded px-3.5 py-2.5 bg-light-surface-container-lowest border border-light-outline-variant font-mono text-mono-sm text-light-on-surface">
+            </label>
+          </div>
+        </section>
+
+        <section class="flex flex-col gap-5">
+          <h2 data-design-text-token="title-lg" class="font-title text-title-lg text-light-on-surface">Execution &amp; Appearance</h2>
+
+          <div class="rounded-md p-4 bg-light-surface-container-lowest border border-light-outline-variant flex items-center justify-between gap-4">
+            <div class="flex flex-col gap-0.5">
+              <span data-design-text-token="title-md" class="font-title text-title-md text-light-on-surface">Authorized Editing</span>
+              <span data-design-text-token="body-sm" class="font-body text-body-sm text-light-on-surface-variant">Require explicit user approval in the Agent Inspector before writing local workspace files.</span>
+            </div>
+            <input type="checkbox" checked class="rounded border-light-outline-variant text-light-primary focus:ring-light-primary">
+          </div>
+
+          <div class="rounded-md p-4 bg-light-surface-container-lowest border border-light-outline-variant flex items-center justify-between gap-4">
+            <div class="flex flex-col gap-0.5">
+              <span data-design-text-token="title-md" class="font-title text-title-md text-light-on-surface">Appearance Theme</span>
+              <span data-design-text-token="body-sm" class="font-body text-body-sm text-light-on-surface-variant">Light-first high-legibility theme optimized for extended academic reading.</span>
+            </div>
+            <select class="rounded border-light-outline-variant bg-light-surface text-body-sm font-label text-light-on-surface py-1.5 pl-3 pr-8">
+              <option selected>Light (Clarity)</option>
+              <option>System</option>
+              <option>Dark</option>
+            </select>
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+  </div>
+  <script>
+    (function () {
+      var btn = document.getElementById('save-settings-btn');
+      var badge = document.getElementById('save-status');
+      if (btn && badge) {
+        btn.addEventListener('click', function () {
+          badge.classList.remove('hidden');
+          badge.classList.add('inline-flex');
+          setTimeout(function () {
+            badge.classList.add('hidden');
+            badge.classList.remove('inline-flex');
+          }, 2200);
+        });
+      }
+    })();
+  </script>
+
+
+</body></html>

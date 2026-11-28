@@ -1,0 +1,377 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Knowledge Base — Research Copilot Agent</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">/** @type {import('tailwindcss').Config} */
+globalThis.tailwind = globalThis.tailwind || {};
+globalThis.tailwind.config = {
+  darkMode: 'class',
+  theme: {
+    extend: {
+      colors: {
+        'light-primary': '#0037B0',
+        'light-on-primary': '#FFFFFF',
+        'light-primary-container': '#1D4ED8',
+        'light-on-primary-container': '#CAD3FF',
+        'light-secondary': '#006780',
+        'light-on-secondary': '#FFFFFF',
+        'light-secondary-container': '#76DCFF',
+        'light-on-secondary-container': '#006077',
+        'light-tertiary': '#5800C0',
+        'light-on-tertiary': '#FFFFFF',
+        'light-tertiary-container': '#712EDD',
+        'light-on-tertiary-container': '#DFCDFF',
+        'light-error': '#BA1A1A',
+        'light-on-error': '#FFFFFF',
+        'light-error-container': '#FFDAD6',
+        'light-on-error-container': '#93000A',
+        'light-background': '#F8F9FF',
+        'light-on-background': '#0B1C30',
+        'light-surface': '#F8F9FF',
+        'light-surface-dim': '#CBDBF5',
+        'light-surface-bright': '#F8F9FF',
+        'light-surface-container-lowest': '#FFFFFF',
+        'light-surface-container-low': '#EFF4FF',
+        'light-surface-container': '#E5EEFF',
+        'light-surface-container-high': '#DCE9FF',
+        'light-surface-container-highest': '#D3E4FE',
+        'light-on-surface': '#0B1C30',
+        'light-surface-variant': '#E0E1F4',
+        'light-on-surface-variant': '#434655',
+        'light-outline': '#747686',
+        'light-outline-variant': '#C4C5D7',
+        'light-inverse-surface': '#213145',
+        'light-inverse-on-surface': '#EAF1FF',
+        'light-inverse-primary': '#B7C4FF',
+        'light-shadow': '#000000',
+        'light-scrim': '#000000',
+        'light-warning': '#904D00',
+        'light-on-warning': '#FFFFFF',
+        'light-warning-container': '#FFDCC3',
+        'light-on-warning-container': '#2F1500',
+        'light-success': '#006C4A',
+        'light-on-success': '#FFFFFF',
+        'light-success-container': '#85F8C4',
+        'light-on-success-container': '#002114',
+        'dark-primary': '#B7C4FF',
+        'dark-on-primary': '#002682',
+        'dark-primary-container': '#1D4ED8',
+        'dark-on-primary-container': '#CAD3FF',
+        'dark-secondary': '#6CD3F7',
+        'dark-on-secondary': '#003543',
+        'dark-secondary-container': '#269DBE',
+        'dark-on-secondary-container': '#001F29',
+        'dark-tertiary': '#D3BBFF',
+        'dark-on-tertiary': '#3F008D',
+        'dark-tertiary-container': '#712EDD',
+        'dark-on-tertiary-container': '#DFCDFF',
+        'dark-error': '#FFB4AB',
+        'dark-on-error': '#690005',
+        'dark-error-container': '#93000A',
+        'dark-on-error-container': '#FFDAD6',
+        'dark-background': '#031427',
+        'dark-on-background': '#D3E4FE',
+        'dark-surface': '#031427',
+        'dark-surface-dim': '#031427',
+        'dark-surface-bright': '#2A3A4F',
+        'dark-surface-container-lowest': '#000F21',
+        'dark-surface-container-low': '#0B1C30',
+        'dark-surface-container': '#102034',
+        'dark-surface-container-high': '#1B2B3F',
+        'dark-surface-container-highest': '#26364A',
+        'dark-on-surface': '#D3E4FE',
+        'dark-surface-variant': '#434655',
+        'dark-on-surface-variant': '#C4C5D7',
+        'dark-outline': '#8E90A0',
+        'dark-outline-variant': '#434655',
+        'dark-inverse-surface': '#D3E4FE',
+        'dark-inverse-on-surface': '#213145',
+        'dark-inverse-primary': '#2151DA',
+        'dark-shadow': '#000000',
+        'dark-scrim': '#000000',
+        'dark-warning': '#FFB77D',
+        'dark-on-warning': '#4D2600',
+        'dark-warning-container': '#6E3900',
+        'dark-on-warning-container': '#FFDCC3',
+        'dark-success': '#68DBA9',
+        'dark-on-success': '#003825',
+        'dark-success-container': '#005137',
+        'dark-on-success-container': '#85F8C4',
+      },
+      borderRadius: {
+        'sm': '6px',
+        'DEFAULT': '8px',
+        'md': '12px',
+        'lg': '16px',
+        'xl': '24px',
+        'full': '9999px',
+      },
+      spacing: {
+        'gutter-xs': '4px',
+        'gutter-sm': '8px',
+        'gutter-md': '16px',
+        'gutter-lg': '24px',
+        'gutter-xl': '32px',
+        'section': '64px',
+        'page-margin': '32px',
+      },
+      fontFamily: {
+        'display': ['"Geist"', 'sans-serif'],
+        'headline': ['"Geist"', 'sans-serif'],
+        'title': ['"Geist"', 'sans-serif'],
+        'body': ['"Geist"', 'sans-serif'],
+        'label': ['"Geist"', 'sans-serif'],
+        'mono': ['"Geist Mono"', 'monospace'],
+      },
+      fontSize: {
+        'display-lg': ['56px', { lineHeight: '62px', letterSpacing: '-1.5px', fontWeight: '600' }],
+        'display-lg-mobile': ['32px', { lineHeight: '38px', letterSpacing: '-0.75px', fontWeight: '600' }],
+        'display-md': ['40px', { lineHeight: '46px', letterSpacing: '-1px', fontWeight: '600' }],
+        'display-md-mobile': ['28px', { lineHeight: '34px', letterSpacing: '-0.5px', fontWeight: '600' }],
+        'headline-lg': ['28px', { lineHeight: '34px', letterSpacing: '-0.5px', fontWeight: '600' }],
+        'headline-md': ['22px', { lineHeight: '28px', letterSpacing: '-0.3px', fontWeight: '600' }],
+        'title-lg': ['18px', { lineHeight: '24px', letterSpacing: '-0.2px', fontWeight: '600' }],
+        'title-md': ['15px', { lineHeight: '22px', letterSpacing: '-0.1px', fontWeight: '600' }],
+        'body-lg': ['16px', { lineHeight: '26px', letterSpacing: '0px', fontWeight: '400' }],
+        'body-md': ['14px', { lineHeight: '22px', letterSpacing: '0px', fontWeight: '400' }],
+        'body-sm': ['13px', { lineHeight: '19px', letterSpacing: '0px', fontWeight: '400' }],
+        'label-lg': ['14px', { lineHeight: '20px', letterSpacing: '0px', fontWeight: '500' }],
+        'label-md': ['12px', { lineHeight: '16px', letterSpacing: '0.1px', fontWeight: '500' }],
+        'label-sm': ['11px', { lineHeight: '14px', letterSpacing: '0.2px', fontWeight: '500' }],
+        'mono-sm': ['13px', { lineHeight: '20px', letterSpacing: '0px', fontWeight: '400' }],
+        'mono-xs': ['11px', { lineHeight: '16px', letterSpacing: '0px', fontWeight: '500' }],
+      },
+      transitionDuration: {
+        'state-change': '120ms',
+        'standard-interaction': '200ms',
+        'panel-slide': '280ms',
+        'surface-enter': '360ms',
+        'brand-transition': '560ms',
+        'surface-exit': '160ms',
+      },
+      transitionDelay: {
+        'state-change': '0ms',
+        'standard-interaction': '0ms',
+        'panel-slide': '0ms',
+        'surface-enter': '0ms',
+        'brand-transition': '0ms',
+        'surface-exit': '0ms',
+      },
+      transitionTimingFunction: {
+        'state-change': 'cubic-bezier(0.2, 0, 0, 1)',
+        'standard-interaction': 'cubic-bezier(0.2, 0, 0, 1)',
+        'panel-slide': 'cubic-bezier(0.16, 1, 0.3, 1)',
+        'surface-enter': 'cubic-bezier(0.16, 1, 0.3, 1)',
+        'brand-transition': 'cubic-bezier(0.16, 1, 0.3, 1)',
+        'surface-exit': 'cubic-bezier(0.4, 0, 1, 1)',
+      },
+    },
+  },
+};
+if (typeof module !== 'undefined') module.exports = globalThis.tailwind.config;
+</script>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=Geist+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet">
+  <style>.material-symbols-outlined, .material-symbols-rounded, .material-symbols-sharp, .material-icons { display: inline-block; width: 1em; height: 1em; line-height: 1 !important; box-sizing: content-box; overflow: hidden; white-space: nowrap; direction: ltr; vertical-align: middle; }</style>
+</head>
+<body class="bg-light-surface text-light-on-surface font-body antialiased">
+  <div class="min-h-[1024px] flex bg-light-surface" data-stitch-vh="min-h-[1024px]===min-h-screen">
+
+    <!-- Persistent Left Application Rail -->
+    <aside class="w-64 shrink-0 min-h-[1024px] bg-light-surface-container-low border-r border-light-outline-variant/70 flex flex-col justify-between p-4" data-stitch-vh="min-h-[1024px]===min-h-screen">
+      <div class="flex flex-col gap-6">
+        <div class="flex items-center justify-between gap-2 px-2 pt-1">
+          <a href="../about-flagship/AboutFlagship.html" class="flex items-center gap-2 shrink-0">
+            <svg width="24" height="24" viewBox="0 0 28 28" fill="none" aria-hidden="true" class="shrink-0">
+              <rect width="28" height="28" rx="7" fill="#0037B0"></rect>
+              <path d="M8.5 9.5C8.5 8.67157 9.17157 8 10 8H15.5L19.5 12V18.5C19.5 19.3284 18.8284 20 18 20H10C9.17157 20 8.5 19.3284 8.5 18.5V9.5Z" stroke="#FFFFFF" stroke-width="1.6"></path>
+              <path d="M15 8V12.5H19.5" stroke="#76DCFF" stroke-width="1.6" stroke-linejoin="round"></path>
+              <circle cx="13" cy="15.5" r="1.5" fill="#76DCFF"></circle>
+            </svg>
+            <span data-design-text-token="title-md" class="font-title text-title-md text-light-on-surface whitespace-nowrap">Research Copilot</span>
+          </a>
+          <button type="button" aria-label="Collapse sidebar" class="p-1.5 rounded text-light-on-surface-variant hover:bg-light-surface-container">
+            <span class="material-symbols-outlined text-[18px]" aria-hidden="true">dock_to_right</span>
+          </button>
+        </div>
+
+        <nav aria-label="Primary" class="flex flex-col gap-1">
+          <a href="../workspace-active/WorkspaceActive.html" class="flex items-center gap-3 px-3 py-2 rounded text-light-on-surface-variant hover:bg-light-surface-container hover:text-light-on-surface">
+            <span class="material-symbols-outlined text-[19px]" aria-hidden="true">forum</span>
+            <span data-design-text-token="label-lg" class="font-label text-label-lg">Workspace</span>
+          </a>
+          <a href="../knowledge-base/KnowledgeBase.html" aria-current="page" class="flex items-center gap-3 px-3 py-2 rounded bg-light-surface-container-lowest text-light-primary shadow-sm border border-light-outline-variant/60">
+            <span class="material-symbols-outlined text-[19px]" style="font-variation-settings: &#39;FILL&#39; 1;" aria-hidden="true">library_books</span>
+            <span data-design-text-token="label-lg" class="font-label text-label-lg">Knowledge Base</span>
+          </a>
+          <a href="../settings/Settings.html" class="flex items-center gap-3 px-3 py-2 rounded text-light-on-surface-variant hover:bg-light-surface-container hover:text-light-on-surface">
+            <span class="material-symbols-outlined text-[19px]" aria-hidden="true">tune</span>
+            <span data-design-text-token="label-lg" class="font-label text-label-lg">Settings</span>
+          </a>
+          <a href="../about-flagship/AboutFlagship.html" class="flex items-center gap-3 px-3 py-2 rounded text-light-on-surface-variant hover:bg-light-surface-container hover:text-light-on-surface">
+            <span class="material-symbols-outlined text-[19px]" aria-hidden="true">info</span>
+            <span data-design-text-token="label-lg" class="font-label text-label-lg">About</span>
+          </a>
+        </nav>
+      </div>
+
+      <div class="flex flex-col gap-2 pt-4 border-t border-light-outline-variant/60">
+        <div class="flex items-center justify-between px-2.5 py-2 rounded bg-light-surface-container-lowest border border-light-outline-variant/70">
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-light-success" aria-hidden="true"></span>
+            <span data-design-text-token="label-md" class="font-label text-label-md text-light-on-surface">Local Engine</span>
+          </div>
+          <span data-design-text-token="mono-xs" class="font-mono text-mono-xs text-light-on-surface-variant">EN</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Document Collection Column -->
+    <section aria-label="Document collection" class="w-72 shrink-0 min-h-[1024px] border-r border-light-outline-variant/70 bg-light-surface flex flex-col" data-stitch-vh="min-h-[1024px]===min-h-screen">
+      <div class="p-4 border-b border-light-outline-variant/60 flex flex-col gap-3">
+        <div class="flex items-center justify-between">
+          <h1 data-design-text-token="title-md" class="font-title text-title-md text-light-on-surface">Knowledge Base</h1>
+          <a href="../pdf-import/PdfImport.html" data-component-id="button-with-icon" data-component-type="button" data-component-variant="with-icon" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded bg-light-primary text-light-on-primary hover:bg-light-primary-container transition-colors duration-state-change">
+            <span class="material-symbols-outlined text-[16px]" aria-hidden="true">upload_file</span>
+            <span data-design-text-token="label-md" class="font-label text-label-md">Import PDF</span>
+          </a>
+        </div>
+
+        <div class="relative flex items-center">
+          <span class="material-symbols-outlined text-[17px] text-light-on-surface-variant absolute left-3 pointer-events-none" aria-hidden="true">search</span>
+          <input type="search" placeholder="Filter 4 papers..." class="w-full rounded pl-9 pr-3 py-2 bg-light-surface-container-lowest border border-light-outline-variant text-body-sm placeholder:text-light-outline focus:border-light-primary focus:ring-2 focus:ring-light-primary/15">
+        </div>
+      </div>
+
+      <div class="flex-1 overflow-y-auto p-3 flex flex-col gap-2">
+        <button type="button" data-doc-title="Attention Is All You Need" data-doc-meta="vaswani_2017_attention.pdf · 4.2 MiB · 15 pages" class="doc-item text-left rounded-md p-3.5 bg-light-surface-container-lowest border border-light-primary shadow-sm active:scale-[0.99] transition-all duration-standard-interaction flex flex-col gap-1.5">
+          <div class="flex items-start justify-between gap-2">
+            <span data-design-text-token="title-md" class="font-title text-title-md text-light-on-surface truncate">Attention Is All You Need</span>
+            <span class="px-1.5 py-0.5 rounded bg-light-success-container text-light-on-success-container font-label text-label-sm shrink-0">Indexed</span>
+          </div>
+          <span data-design-text-token="body-sm" class="font-body text-body-sm text-light-on-surface-variant">Vaswani et al. · 2017</span>
+          <span data-design-text-token="mono-xs" class="font-mono text-mono-xs text-light-on-surface-variant tabular-nums">15 pp · 4.2 MiB · 48 frags</span>
+        </button>
+
+        <button type="button" data-doc-title="FlashAttention-2" data-doc-meta="dao_2023_flashattention2.pdf · 3.8 MiB · 17 pages" class="doc-item text-left rounded-md p-3.5 bg-light-surface-container-lowest/60 border border-light-outline-variant/60 hover:bg-light-surface-container-lowest hover:border-light-outline-variant active:scale-[0.99] transition-all duration-standard-interaction flex flex-col gap-1.5">
+          <span data-design-text-token="title-md" class="font-title text-title-md text-light-on-surface truncate">FlashAttention-2</span>
+          <span data-design-text-token="body-sm" class="font-body text-body-sm text-light-on-surface-variant">Tri Dao · 2023</span>
+          <span data-design-text-token="mono-xs" class="font-mono text-mono-xs text-light-on-surface-variant tabular-nums">17 pp · 3.8 MiB · 54 frags</span>
+        </button>
+
+        <button type="button" data-doc-title="RAG for Knowledge Tasks" data-doc-meta="lewis_2020_rag.pdf · 5.1 MiB · 19 pages" class="doc-item text-left rounded-md p-3.5 bg-light-surface-container-lowest/60 border border-light-outline-variant/60 hover:bg-light-surface-container-lowest hover:border-light-outline-variant active:scale-[0.99] transition-all duration-standard-interaction flex flex-col gap-1.5">
+          <span data-design-text-token="title-md" class="font-title text-title-md text-light-on-surface truncate">RAG for Knowledge Tasks</span>
+          <span data-design-text-token="body-sm" class="font-body text-body-sm text-light-on-surface-variant">Lewis et al. · 2020</span>
+          <span data-design-text-token="mono-xs" class="font-mono text-mono-xs text-light-on-surface-variant tabular-nums">19 pp · 5.1 MiB · 62 frags</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Document Reader & Fragment Inspector -->
+    <main class="flex-1 flex flex-col min-w-0 bg-light-surface-container-lowest">
+      <header class="px-8 py-4 border-b border-light-outline-variant/60 flex flex-wrap items-center justify-between gap-4">
+        <div class="flex flex-col gap-0.5">
+          <h2 id="doc-reader-title" data-design-text-token="title-lg" class="font-title text-title-lg text-light-on-surface">Attention Is All You Need</h2>
+          <span id="doc-reader-meta" data-design-text-token="mono-xs" class="font-mono text-mono-xs text-light-on-surface-variant">vaswani_2017_attention.pdf · 4.2 MiB · 15 pages</span>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <div class="inline-flex items-center gap-1 rounded border border-light-outline-variant bg-light-surface px-2 py-1">
+            <button type="button" aria-label="Previous page" class="p-1 rounded hover:bg-light-surface-container">
+              <span class="material-symbols-outlined text-[16px]" aria-hidden="true">chevron_left</span>
+            </button>
+            <span data-design-text-token="mono-xs" class="font-mono text-mono-xs text-light-on-surface px-2 tabular-nums">Page 4 / 15</span>
+            <button type="button" aria-label="Next page" class="p-1 rounded hover:bg-light-surface-container">
+              <span class="material-symbols-outlined text-[16px]" aria-hidden="true">chevron_right</span>
+            </button>
+          </div>
+
+          <a href="../workspace-active/WorkspaceActive.html" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded bg-light-surface-container-low border border-light-outline-variant text-light-primary hover:bg-light-surface-container transition-colors duration-state-change">
+            <span class="material-symbols-outlined text-[17px]" aria-hidden="true">chat_add_on</span>
+            <span data-design-text-token="label-md" class="font-label text-label-md">Ask About Document</span>
+          </a>
+        </div>
+      </header>
+
+      <div class="flex-1 grid grid-cols-1 lg:grid-cols-12 min-h-0">
+        <div class="lg:col-span-7 p-8 overflow-y-auto border-r border-light-outline-variant/50 flex flex-col gap-5">
+          <div class="inline-flex p-1 rounded bg-light-surface-container-low border border-light-outline-variant/60 w-fit">
+            <button type="button" class="px-3 py-1 rounded-sm bg-light-surface-container-lowest text-light-on-surface shadow-sm font-label text-label-md whitespace-nowrap">Source Text</button>
+            <button type="button" class="px-3 py-1 rounded-sm text-light-on-surface-variant font-label text-label-md whitespace-nowrap">Fragments (48)</button>
+          </div>
+
+          <div class="max-w-prose flex flex-col gap-4">
+            <h3 data-design-text-token="title-md" class="font-title text-title-md text-light-on-surface">3.2.1 Scaled Dot-Product Attention</h3>
+            <p data-design-text-token="body-lg" class="font-body text-body-lg text-light-on-surface text-pretty">
+              We call our particular attention &#34;Scaled Dot-Product Attention&#34;. The input consists of queries and keys of dimension d_k, and values of dimension d_v. We compute the dot products of the query with all keys, divide each by √d_k, and apply a softmax function to obtain the weights on the values.
+            </p>
+            <p data-design-text-token="body-lg" class="font-body text-body-lg text-light-on-surface-variant text-pretty">
+              In practice, we compute the attention function on a set of queries simultaneously, packed together into a matrix Q. The keys and values are also packed together into matrices K and V. While additive attention and dot-product attention are similar in theoretical complexity, dot-product attention is much faster and more space-efficient in practice using optimized matrix multiplication code.
+            </p>
+          </div>
+        </div>
+
+        <aside aria-label="Fragment relationships" class="lg:col-span-5 p-6 bg-light-surface-container-low/40 flex flex-col gap-5 overflow-y-auto">
+          <div class="flex items-center justify-between gap-2">
+            <span data-design-text-token="title-md" class="font-title text-title-md text-light-on-surface whitespace-nowrap">Fragment #14</span>
+            <span data-design-text-token="mono-xs" class="font-mono text-mono-xs text-light-secondary whitespace-nowrap">p. 4 · 318 tok</span>
+          </div>
+
+          <div class="rounded-md p-4 bg-light-surface-container-lowest border border-light-primary/40 flex flex-col gap-2">
+            <span data-design-text-token="label-sm" class="font-label text-label-sm text-light-primary">Current Fragment</span>
+            <p data-design-text-token="body-sm" class="font-body text-body-sm text-light-on-surface">
+              &#34;We compute the dot products of the query with all keys, divide each by √d_k, and apply a softmax function...&#34;
+            </p>
+          </div>
+
+          <div class="flex flex-col gap-2.5">
+            <span data-design-text-token="label-md" class="font-label text-label-md text-light-on-surface-variant">Adjacent Fragments</span>
+            <div class="rounded-md p-3.5 bg-light-surface-container-lowest border border-light-outline-variant/80 flex flex-col gap-1">
+              <div class="flex items-center justify-between">
+                <span data-design-text-token="mono-xs" class="font-mono text-mono-xs text-light-on-surface-variant">Fragment #13 · Preceding</span>
+                <span data-design-text-token="mono-xs" class="font-mono text-mono-xs text-light-on-surface-variant">p. 3</span>
+              </div>
+              <p data-design-text-token="body-sm" class="font-body text-body-sm text-light-on-surface-variant text-balance">
+                An attention function maps a query and key-value pairs to an output vector.
+              </p>
+            </div>
+            <div class="rounded-md p-3.5 bg-light-surface-container-lowest border border-light-outline-variant/80 flex flex-col gap-1">
+              <div class="flex items-center justify-between">
+                <span data-design-text-token="mono-xs" class="font-mono text-mono-xs text-light-on-surface-variant">Fragment #15 · Following</span>
+                <span data-design-text-token="mono-xs" class="font-mono text-mono-xs text-light-on-surface-variant">p. 4–5</span>
+              </div>
+              <p data-design-text-token="body-sm" class="font-body text-body-sm text-light-on-surface-variant text-balance">
+                Multi-Head Attention projects queries, keys, and values across parallel subspaces.
+              </p>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </main>
+
+  </div>
+  <script>
+    (function () {
+      var items = document.querySelectorAll('.doc-item');
+      var titleEl = document.getElementById('doc-reader-title');
+      var metaEl = document.getElementById('doc-reader-meta');
+      if (!items.length || !titleEl || !metaEl) return;
+
+      items.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          items.forEach(function (other) {
+            other.classList.remove('border-light-primary', 'shadow-sm', 'bg-light-surface-container-lowest');
+            other.classList.add('bg-light-surface-container-lowest/60', 'border-light-outline-variant/60');
+          });
+          btn.classList.remove('bg-light-surface-container-lowest/60', 'border-light-outline-variant/60');
+          btn.classList.add('bg-light-surface-container-lowest', 'border-light-primary', 'shadow-sm');
+          titleEl.textContent = btn.getAttribute('data-doc-title') || '';
+          metaEl.textContent = btn.getAttribute('data-doc-meta') || '';
+        });
+      });
+    })();
+  </script>
+
+
+</body></html>

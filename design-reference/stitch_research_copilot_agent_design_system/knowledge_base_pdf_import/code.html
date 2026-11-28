@@ -1,0 +1,263 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PDF Import — Knowledge Base — Research Copilot Agent</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">/** @type {import('tailwindcss').Config} */
+globalThis.tailwind = globalThis.tailwind || {};
+globalThis.tailwind.config = {
+  darkMode: 'class',
+  theme: {
+    extend: {
+      colors: {
+        'light-primary': '#0037B0',
+        'light-on-primary': '#FFFFFF',
+        'light-primary-container': '#1D4ED8',
+        'light-on-primary-container': '#CAD3FF',
+        'light-secondary': '#006780',
+        'light-on-secondary': '#FFFFFF',
+        'light-secondary-container': '#76DCFF',
+        'light-on-secondary-container': '#006077',
+        'light-tertiary': '#5800C0',
+        'light-on-tertiary': '#FFFFFF',
+        'light-tertiary-container': '#712EDD',
+        'light-on-tertiary-container': '#DFCDFF',
+        'light-error': '#BA1A1A',
+        'light-on-error': '#FFFFFF',
+        'light-error-container': '#FFDAD6',
+        'light-on-error-container': '#93000A',
+        'light-background': '#F8F9FF',
+        'light-on-background': '#0B1C30',
+        'light-surface': '#F8F9FF',
+        'light-surface-dim': '#CBDBF5',
+        'light-surface-bright': '#F8F9FF',
+        'light-surface-container-lowest': '#FFFFFF',
+        'light-surface-container-low': '#EFF4FF',
+        'light-surface-container': '#E5EEFF',
+        'light-surface-container-high': '#DCE9FF',
+        'light-surface-container-highest': '#D3E4FE',
+        'light-on-surface': '#0B1C30',
+        'light-surface-variant': '#E0E1F4',
+        'light-on-surface-variant': '#434655',
+        'light-outline': '#747686',
+        'light-outline-variant': '#C4C5D7',
+        'light-inverse-surface': '#213145',
+        'light-inverse-on-surface': '#EAF1FF',
+        'light-inverse-primary': '#B7C4FF',
+        'light-shadow': '#000000',
+        'light-scrim': '#000000',
+        'light-warning': '#904D00',
+        'light-on-warning': '#FFFFFF',
+        'light-warning-container': '#FFDCC3',
+        'light-on-warning-container': '#2F1500',
+        'light-success': '#006C4A',
+        'light-on-success': '#FFFFFF',
+        'light-success-container': '#85F8C4',
+        'light-on-success-container': '#002114',
+        'dark-primary': '#B7C4FF',
+        'dark-on-primary': '#002682',
+        'dark-primary-container': '#1D4ED8',
+        'dark-on-primary-container': '#CAD3FF',
+        'dark-secondary': '#6CD3F7',
+        'dark-on-secondary': '#003543',
+        'dark-secondary-container': '#269DBE',
+        'dark-on-secondary-container': '#001F29',
+        'dark-tertiary': '#D3BBFF',
+        'dark-on-tertiary': '#3F008D',
+        'dark-tertiary-container': '#712EDD',
+        'dark-on-tertiary-container': '#DFCDFF',
+        'dark-error': '#FFB4AB',
+        'dark-on-error': '#690005',
+        'dark-error-container': '#93000A',
+        'dark-on-error-container': '#FFDAD6',
+        'dark-background': '#031427',
+        'dark-on-background': '#D3E4FE',
+        'dark-surface': '#031427',
+        'dark-surface-dim': '#031427',
+        'dark-surface-bright': '#2A3A4F',
+        'dark-surface-container-lowest': '#000F21',
+        'dark-surface-container-low': '#0B1C30',
+        'dark-surface-container': '#102034',
+        'dark-surface-container-high': '#1B2B3F',
+        'dark-surface-container-highest': '#26364A',
+        'dark-on-surface': '#D3E4FE',
+        'dark-surface-variant': '#434655',
+        'dark-on-surface-variant': '#C4C5D7',
+        'dark-outline': '#8E90A0',
+        'dark-outline-variant': '#434655',
+        'dark-inverse-surface': '#D3E4FE',
+        'dark-inverse-on-surface': '#213145',
+        'dark-inverse-primary': '#2151DA',
+        'dark-shadow': '#000000',
+        'dark-scrim': '#000000',
+        'dark-warning': '#FFB77D',
+        'dark-on-warning': '#4D2600',
+        'dark-warning-container': '#6E3900',
+        'dark-on-warning-container': '#FFDCC3',
+        'dark-success': '#68DBA9',
+        'dark-on-success': '#003825',
+        'dark-success-container': '#005137',
+        'dark-on-success-container': '#85F8C4',
+      },
+      borderRadius: {
+        'sm': '6px',
+        'DEFAULT': '8px',
+        'md': '12px',
+        'lg': '16px',
+        'xl': '24px',
+        'full': '9999px',
+      },
+      spacing: {
+        'gutter-xs': '4px',
+        'gutter-sm': '8px',
+        'gutter-md': '16px',
+        'gutter-lg': '24px',
+        'gutter-xl': '32px',
+        'section': '64px',
+        'page-margin': '32px',
+      },
+      fontFamily: {
+        'display': ['"Geist"', 'sans-serif'],
+        'headline': ['"Geist"', 'sans-serif'],
+        'title': ['"Geist"', 'sans-serif'],
+        'body': ['"Geist"', 'sans-serif'],
+        'label': ['"Geist"', 'sans-serif'],
+        'mono': ['"Geist Mono"', 'monospace'],
+      },
+      fontSize: {
+        'display-lg': ['56px', { lineHeight: '62px', letterSpacing: '-1.5px', fontWeight: '600' }],
+        'display-lg-mobile': ['32px', { lineHeight: '38px', letterSpacing: '-0.75px', fontWeight: '600' }],
+        'display-md': ['40px', { lineHeight: '46px', letterSpacing: '-1px', fontWeight: '600' }],
+        'display-md-mobile': ['28px', { lineHeight: '34px', letterSpacing: '-0.5px', fontWeight: '600' }],
+        'headline-lg': ['28px', { lineHeight: '34px', letterSpacing: '-0.5px', fontWeight: '600' }],
+        'headline-md': ['22px', { lineHeight: '28px', letterSpacing: '-0.3px', fontWeight: '600' }],
+        'title-lg': ['18px', { lineHeight: '24px', letterSpacing: '-0.2px', fontWeight: '600' }],
+        'title-md': ['15px', { lineHeight: '22px', letterSpacing: '-0.1px', fontWeight: '600' }],
+        'body-lg': ['16px', { lineHeight: '26px', letterSpacing: '0px', fontWeight: '400' }],
+        'body-md': ['14px', { lineHeight: '22px', letterSpacing: '0px', fontWeight: '400' }],
+        'body-sm': ['13px', { lineHeight: '19px', letterSpacing: '0px', fontWeight: '400' }],
+        'label-lg': ['14px', { lineHeight: '20px', letterSpacing: '0px', fontWeight: '500' }],
+        'label-md': ['12px', { lineHeight: '16px', letterSpacing: '0.1px', fontWeight: '500' }],
+        'label-sm': ['11px', { lineHeight: '14px', letterSpacing: '0.2px', fontWeight: '500' }],
+        'mono-sm': ['13px', { lineHeight: '20px', letterSpacing: '0px', fontWeight: '400' }],
+        'mono-xs': ['11px', { lineHeight: '16px', letterSpacing: '0px', fontWeight: '500' }],
+      },
+      transitionDuration: {
+        'state-change': '120ms',
+        'standard-interaction': '200ms',
+        'panel-slide': '280ms',
+        'surface-enter': '360ms',
+        'brand-transition': '560ms',
+        'surface-exit': '160ms',
+      },
+      transitionDelay: {
+        'state-change': '0ms',
+        'standard-interaction': '0ms',
+        'panel-slide': '0ms',
+        'surface-enter': '0ms',
+        'brand-transition': '0ms',
+        'surface-exit': '0ms',
+      },
+      transitionTimingFunction: {
+        'state-change': 'cubic-bezier(0.2, 0, 0, 1)',
+        'standard-interaction': 'cubic-bezier(0.2, 0, 0, 1)',
+        'panel-slide': 'cubic-bezier(0.16, 1, 0.3, 1)',
+        'surface-enter': 'cubic-bezier(0.16, 1, 0.3, 1)',
+        'brand-transition': 'cubic-bezier(0.16, 1, 0.3, 1)',
+        'surface-exit': 'cubic-bezier(0.4, 0, 1, 1)',
+      },
+    },
+  },
+};
+if (typeof module !== 'undefined') module.exports = globalThis.tailwind.config;
+</script>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=Geist+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet">
+  <style>
+    .material-symbols-outlined, .material-symbols-rounded, .material-symbols-sharp, .material-icons { display: inline-block; width: 1em; height: 1em; line-height: 1 !important; box-sizing: content-box; overflow: hidden; white-space: nowrap; direction: ltr; vertical-align: middle; }
+    @keyframes modalMount {
+      from { opacity: 0; transform: scale(0.97) translateY(8px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .animate-modal { animation: modalMount 360ms cubic-bezier(0.16, 1, 0.3, 1) both; }
+    @media (prefers-reduced-motion: reduce) {
+      .animate-modal { animation: none; }
+    }
+  </style>
+</head>
+<body class="bg-light-surface text-light-on-surface font-body antialiased">
+  <div class="min-h-[1024px] relative flex bg-light-surface" data-stitch-vh="min-h-[1024px]===min-h-screen">
+
+    <!-- Background Knowledge Base Shell -->
+    <aside aria-hidden="true" class="w-64 shrink-0 min-h-[1024px] bg-light-surface-container-low border-r border-light-outline-variant/70 p-4" data-stitch-vh="min-h-[1024px]===min-h-screen"></aside>
+
+    <div aria-hidden="true" class="flex-1 bg-light-surface-container-lowest p-8"></div>
+
+    <!-- Centered PDF Import Dialog Overlay -->
+    <div class="fixed inset-0 z-40 bg-light-surface-dim/80 backdrop-blur-sm flex items-center justify-center p-6">
+      <section role="dialog" aria-modal="true" aria-labelledby="import-modal-title" data-component-id="modal-standard" data-component-type="modal" data-component-variant="standard" class="animate-modal w-full max-w-xl rounded-lg bg-light-surface-container-lowest border border-light-outline-variant shadow-2xl overflow-hidden flex flex-col">
+        <header class="flex items-start justify-between gap-4 px-6 pt-6 pb-4 border-b border-light-outline-variant/60">
+          <div class="flex flex-col gap-1">
+            <h1 id="import-modal-title" data-design-text-token="title-lg" class="font-title text-title-lg text-light-on-surface">Import PDF to Local Knowledge Base</h1>
+            <p data-design-text-token="body-sm" class="font-body text-body-sm text-light-on-surface-variant">
+              Maximum file size: 20 MiB · Maximum length: 500 pages per document.
+            </p>
+          </div>
+          <a href="../knowledge-base/KnowledgeBase.html" aria-label="Close dialog" class="inline-flex items-center justify-center w-8 h-8 rounded text-light-on-surface-variant hover:bg-light-surface-container-low">
+            <span class="material-symbols-outlined text-[20px]" aria-hidden="true">close</span>
+          </a>
+        </header>
+
+        <div class="p-6 flex flex-col gap-5">
+          <div class="rounded-lg border-2 border-dashed border-light-primary/50 bg-light-surface-container-low/60 p-8 flex flex-col items-center text-center gap-3">
+            <div class="w-11 h-11 rounded-full bg-light-surface-container-lowest border border-light-outline-variant flex items-center justify-center text-light-primary shadow-sm">
+              <span class="material-symbols-outlined text-[22px]" aria-hidden="true">upload_file</span>
+            </div>
+            <div class="flex flex-col gap-1">
+              <span data-design-text-token="title-md" class="font-title text-title-md text-light-on-surface">Drop PDF files here, or browse local storage</span>
+              <span data-design-text-token="body-sm" class="font-body text-body-sm text-light-on-surface-variant">Text extraction and hybrid indexing run locally on your machine.</span>
+            </div>
+          </div>
+
+          <div class="flex flex-col gap-2.5">
+            <div class="rounded-md p-3.5 bg-light-surface-container-low border border-light-outline-variant/70 flex flex-col gap-2">
+              <div class="flex items-center justify-between gap-3">
+                <div class="flex items-center gap-2.5">
+                  <span class="material-symbols-outlined text-[18px] text-light-primary" aria-hidden="true">description</span>
+                  <span data-design-text-token="body-md" class="font-body text-body-md text-light-on-surface font-medium">deepseek_r1_2025.pdf</span>
+                </div>
+                <span data-design-text-token="mono-xs" class="font-mono text-mono-xs text-light-primary tabular-nums">6.4 MiB · 22 pp · 72%</span>
+              </div>
+              <div class="w-full h-1.5 rounded-full bg-light-surface-container overflow-hidden">
+                <div class="h-full bg-light-primary w-3/4 rounded-full"></div>
+              </div>
+            </div>
+
+            <div class="rounded-md p-3.5 bg-light-error-container/40 border border-light-error/40 flex items-start justify-between gap-3">
+              <div class="flex items-start gap-2.5">
+                <span class="material-symbols-outlined text-[18px] text-light-error mt-0.5" aria-hidden="true">error</span>
+                <div class="flex flex-col gap-0.5">
+                  <span data-design-text-token="body-md" class="font-body text-body-md text-light-on-error-container font-medium">handbook_full_edition.pdf</span>
+                  <span data-design-text-token="body-sm" class="font-body text-body-sm text-light-on-error-container">Rejected: 28.4 MiB exceeds the 20 MiB local import limit.</span>
+                </div>
+              </div>
+              <span class="px-2 py-0.5 rounded-full bg-light-error text-light-on-error font-label text-label-sm">Invalid</span>
+            </div>
+          </div>
+        </div>
+
+        <footer class="flex items-center justify-end gap-3 px-6 py-4 bg-light-surface-container-low border-t border-light-outline-variant/60">
+          <a href="../knowledge-base/KnowledgeBase.html" class="px-4 py-2 rounded text-light-on-surface-variant hover:bg-light-surface-container font-label text-label-lg">
+            Cancel
+          </a>
+          <a href="../knowledge-base/KnowledgeBase.html" class="px-4 py-2 rounded bg-light-primary text-light-on-primary hover:bg-light-primary-container font-label text-label-lg">
+            Done
+          </a>
+        </footer>
+      </section>
+    </div>
+
+  </div>
+
+
+</body></html>

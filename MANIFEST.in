@@ -1,0 +1,13 @@
+include README.md README.zh-CN.md requirements.txt config.yaml logo.png
+recursive-include docs *.md *.json
+recursive-include web *
+recursive-include frontend *.js
+recursive-include scripts *.py *.mjs
+include package.json package-lock.json Makefile
+exclude config.local.yaml .env
+prune data
+prune artifacts
+prune node_modules
+prune .local-backups
+prune design-reference
+global-exclude __pycache__ *.py[cod] .DS_Store

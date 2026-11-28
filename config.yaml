@@ -1,0 +1,42 @@
+# ${VAR} 或 VAR 引用环境变量；空值不覆盖已有环境配置。
+api:
+  model_name: deepseek-chat           # 路由关闭时的兜底模型
+  api_key: "${OPENAI_API_KEY}"
+  base_url: https://api.deepseek.com
+
+  simple:                             # 简单问题
+    model_name: deepseek-chat
+    api_key: "${SIMPLE_MODEL_API_KEY}"
+    base_url: https://api.deepseek.com
+
+  complex:                            # 复杂问题
+    model_name: deepseek-reasoner
+    api_key: "${COMPLEX_MODEL_API_KEY}"
+    base_url: https://api.deepseek.com
+
+  embedding:                          # 仅 vector/hybrid 模式使用
+    model_name: text-embedding-3-small
+    api_key: "${EMBEDDING_API_KEY}"
+    base_url: https://api.openai.com/v1
+
+retrieval:
+  mode: keyword                       # keyword | semantic | vector | hybrid
+  enable_embedding: false
+  hybrid_candidates: 12
+  vector_candidates: 48
+  vector_batch_size: 32
+  top_k: 3                            # 返回片段数
+  neighbors: 1                        # 附带相邻 chunk 数
+
+agent:
+  max_steps: 5                        # ReAct 最大推理步数
+  max_memory_turns: 10                 # 固定轮数 Memory 兼容参数；当前 Agent 使用 Token 预算上下文
+  model_router_enabled: true          # 自动区分简单/复杂问题
+
+knowledge:
+  base_path: data/knowledge_base.json # make init 的输出路径
+
+web:
+  host: 127.0.0.1                     # 0.0.0.0 = 局域网可访问
+  port: 7860
+  cors_origin: ""                     # ""=同源  "*"=允许所有
